@@ -1,0 +1,153 @@
+﻿@{
+    ViewBag.Title = "ViewEmployee";
+    Layout = "~/Views/Shared/_Layout-Software-Index.cshtml";
+    List<MedicareNetworksCommon.Models.Employee.RoleType> roletype = ViewData["RoleTypes"] as List<MedicareNetworksCommon.Models.Employee.RoleType>;
+    List<MedicareNetworksCommon.Models.Dashboard.Module> Modules = ViewData["AllModules"] as List<MedicareNetworksCommon.Models.Dashboard.Module>;
+}
+@model Tuple<MedicareNetworksCommon.Models.Employee.Emp, List<MedicareNetworksCommon.Models.Employee.Modules>>
+
+<h2>Employee Profile</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="panel-body">
+                    <form role="form" class="form-horizontal" method="post" action="/Employee/Edit/@Model.Item1.ID">
+                        <h5 class="space15">User Credentials </h5>
+                        <input type="hidden" id="empID" name="empID" value="@Model.Item1.ID" />
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtName">
+                                Name											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    @Model.Item1.Name                                    
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtFatherName">
+                                Father Name											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    @Model.Item1.FatherName                                    
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtReligion">
+                                Religion
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    @Model.Item1.Religion                                    
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtNationality">
+                                Nationality										
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    @Model.Item1.Nationality                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtDateofBirth">
+                                Date of Birth
+                            </label>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    @Model.Item1.DateofBirth.ToString("dd-MM-yyyy").Replace('/', '-')                                  
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtCNIC">
+                                CNIC											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    @Model.Item1.CNIC                                    
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtMobileNumber">
+                                Mobile Number											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    @Model.Item1.MobileNo                                    
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtAddress">
+                                Address											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    @Model.Item1.Address                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtUserName">
+                                User Name											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    @Model.Item1.LoginName                                    
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtPassword">
+                                Password										
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    @Model.Item1.LoginPass                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="ddlRoleType">
+                                Role Type											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">                                   
+                                        @Model.Item1.Roletype                                   
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <h5 class="space15">Assign Areas to this User </h5>
+                        <div class="form-group">
+                            @foreach (var item in Model.Item2)
+                            {                                                               
+                                <label class="checkbox-inline">
+                                    @item.Module
+                                </label>                               
+                            }
+                        </div>
+                        <input type="hidden" id="SelectedModules" name="SelectedModules" />
+                        <button type="submit" class="btn btn-primary" onclick="Edit/@Model.Item1.ID">
+                            Edit
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

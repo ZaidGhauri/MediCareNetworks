@@ -1,0 +1,107 @@
+﻿@{
+    Layout = null;
+}
+@using Kendo.Mvc.UI;
+@model IEnumerable<MedicareNetworksCommon.Models.Reports.EmpAttendance>
+
+
+<!DOCTYPE html>
+
+<html style="margin:0px; padding:0px;; background-color:black;">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Medi Care Network</title>
+    <script src="~/Kendo/js/jquery.min.js"></script>
+    <script src="~/Kendo/js/kendo.all.min.js"></script>
+    <script src="~/Kendo/js/kendo.aspnetmvc.min.js"></script>
+    <script src="~/Kendo/js/kendo.web.min.js"></script>
+    <link href="~/Kendo/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/Kendo/styles/kendo.black.min.css" rel="stylesheet" />
+
+</head>
+<body style="margin:10px; padding:0px; overflow:hidden;">       
+    <div>
+        <table style="width:100%;">
+            <tr>
+                <td style="width:50%;">
+                    <h2 style=" margin-left:5%; color:white;">Employee Attendance</h2>
+                </td>
+                <td style="text-align:right; width:40%;">
+                    <a style=" margin-right:5%; color:white; text-decoration:none; font-weight:bold" href="/Admin/Dashboard">BACK</a>
+                </td>
+            </tr>
+        </table></div>
+<div id="divKendoGrid" style="margin:0px; padding:0px; width:100%; table-layout:fixed; ">
+    @(Html.Kendo().Grid<MedicareNetworksCommon.Models.Reports.EmpAttendance>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            //            columns.Bound(c => c.ContactName).ClientTemplate(
+            //                    @"<div class='customer-photo'
+            //                        style='background-image: url(../../content/web/Customers/#:data.CustomerID#.jpg);'></div>
+            //                    <div class='customer-name'>#: ContactName #</div>")
+            //              .Width(240);
+            columns.Bound(c => c.ID).Hidden(true);
+            columns.Bound(c => c.EmployeeID).Hidden(true);
+            columns.Bound(c => c.EmpName).Width(200);
+            columns.Bound(c => c.CurrentDate).Width(400);
+            columns.Bound(c => c.Present).Width(100);
+        })
+        .HtmlAttributes(new { style = "height: 99%; width: 100%;" })
+        .Scrollable()
+        .Groupable()
+        .Sortable()
+        .Filterable()
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(100))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(20)
+            .Model(model => model.Id(x => x.ID))
+            .Read(read => read.Action("GetEmployeeAttendance", "Reports"))
+        )
+    )
+</div>
+
+    
+<style type="text/css">
+    #divKendoGrid {
+        width: 952px;
+        height: 396px;
+        margin: 20px auto 0;
+        padding: 51px 4px 0 4px;
+    }
+
+    .k-grid-content {
+        height: 100%;
+    }
+
+    .customer-photo {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-size: 32px 35px;
+        background-position: center center;
+        vertical-align: middle;
+        line-height: 32px;
+        box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+        margin-left: 5px;
+    }
+
+    .customer-name {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 32px;
+        padding-left: 3px;
+    }
+</style>
+    <script type="text/javascript">
+        var WinHeight = $(window).innerHeight().toString().replace("px", "");
+        WinHeight = WinHeight - 100;
+        $("#divKendoGrid").css("height", WinHeight + "px");
+    </script>
+</body>
+</html>

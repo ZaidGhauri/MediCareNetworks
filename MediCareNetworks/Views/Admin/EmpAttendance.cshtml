@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "EmpAttendance";
+    Layout = "~/Views/Shared/_Layout-Software-Index.cshtml";
+}
+@model IEnumerable<MedicareNetworksCommon.Models.Employee.Emp>
+<h2>Mark Attendance for <strong>@DateTime.Now.ToString("dd-MMM-yyyy").Replace('/', '-')</strong></h2>
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="panel-body">
+                    <form role="form" class="form-horizontal" method="post" action="/Admin/MarkAttendance">
+                        <input type="hidden" id="ClientID" name="ClientID" value="0" />
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtName">
+                                Select Employee											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    <select id="form-field-select-3" class="form-control search-select" name="ddlEmployees">
+                                        @foreach (var item in Model)
+                                        {
+                                            <option value="@item.ID">@item.Name</option> 
+                                        }
+                                    </select>
+                                </span>
+                            </div>
+                        </div>                        
+                        <button type="submit" class="btn btn-primary" onclick="MarkAttendance">
+                            Mark Attendance
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "ClientList";
+    Layout = "~/Views/Shared/_Layout-Software-Index.cshtml";
+}
+@model IEnumerable<MedicareNetworksCommon.Models.Client.Clients>
+<h2>Clients List</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- start: BASIC TABLE PANEL -->
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <table class="table table-hover" id="sample-table-1" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th style="width:15%;">Name</th>
+                            <th style="width:10%;">Attended Person</th>
+                            <th style="width:10%;">Mobile No</th>
+                            <th style="width:10%;">Office No</th>
+                            <th style="width:15%;">Address</th>
+                            <th style="width:5%;" >Rating</th>
+                            <th style="width:20%;">Comments</th>
+                            <th style="width:15%;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() > 0)
+                        {
+                            foreach (var item in Model)
+                            {
+                            <tr>
+                                <td style="display: none">@item.ID</td>
+                                <td style="width:15%;">@item.Name</td>
+                                <td style="width:10%;">@item.PersonName</td>
+                                <td style="width:10%;">@item.MobileNo</td>
+                                <td style="width:10%;">@item.ContactNo</td>
+                                <td style="width:15%;">@item.Address</td>
+                                <td style="width:5%;" >@item.Rating</td>
+                                <td style="width:20%;">@item.Comments</td>
+                                <td style="width:15%;"  class="center">
+                                    <div class="visible-md visible-lg hidden-sm hidden-xs">
+                                        <a href="/Client/Edit/@item.ID" class="btn btn-xs btn-blue tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                        @*<a href="/Client/View/@item.ID" class="btn btn-xs btn-green tooltips" data-placement="top" data-original-title="View"><i class="fa fa-share"></i></a>*@
+                                        <a href="/Client/Remove/@item.ID" class="btn btn-xs btn-red tooltips" data-placement="top" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i></a>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr style="text-align: center">No data found</tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end: BASIC TABLE PANEL -->
+    </div>
+</div>

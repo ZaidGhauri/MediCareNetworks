@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout-Software-Index.cshtml";
+}
+@model MedicareNetworksCommon.Models.Client.Clients
+<h2>Edit Client</h2>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="panel-body">
+                    <form role="form" class="form-horizontal" method="post" action="/Client/UpdateClient">
+                        <input type="hidden" id="ClientID" name="ClientID" value="@Model.ID" />
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtName">
+                                Name				                                							
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    <input id="txtName" name="txtName" class="form-control" type="text" title="" value="@Model.Name" placeholder="Name">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtperson">
+                                Responsible Person
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    <input id="txtperson" name="txtPerson" class="form-control" type="text" title="" value="@Model.PersonName" placeholder="Responsible Person">
+                                </span>
+                            </div>
+                        </div>                   
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtMobileNumber">
+                                Mobile Number											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    <input id="txtMobileNumber" name="txtMobileNumber" class="form-control" type="text" title="" value="@Model.MobileNo" placeholder="Mobile Number">
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtOfficeNo">
+                                Office Number											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    <input id="txtOfficeNo" name="txtOfficeNo" class="form-control" type="text" value="@Model.ContactNo" title="" placeholder="Office Number">
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtAddress">
+                                Address											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    <input id="txtAddress" name="txtAddress" class="form-control" type="text" title="" value="@Model.Address" placeholder="Address">
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="ddlRoleType">
+                                Performance Rating
+                            </label>
+                            <div class="col-sm-6">
+                                <label class="radio-inline">
+                                    <input type="radio" value="1" name="optionsRadios" checked="@(Model.RatingID == 1 ? "checked" : "")" class="grey">
+                                    Bad
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="2" name="optionsRadios" checked="@(Model.RatingID == 2 ? "checked" : "")" class="grey">
+                                    Fair									
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="3" name="optionsRadios" checked="@(Model.RatingID == 3 ? "checked" : "")" class="grey">
+                                    Good									
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="4" name="optionsRadios" checked="@(Model.RatingID == 4 ? "checked" : "")" class="grey">
+                                    Best									
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="5" name="optionsRadios" checked="@(Model.RatingID == 5 ? "checked" : "")" class="grey">
+                                    Excellant									
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtComment">
+                                Additional Comments
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    <textarea id="txtComment" name="txtComment" class="form-control" title="" placeholder="Additional Comments">@Model.Comments</textarea>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" onclick="UpdateClient">
+                            Update
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

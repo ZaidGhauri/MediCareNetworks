@@ -1,0 +1,173 @@
+﻿@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout-Software-Index.cshtml";
+    List<MedicareNetworksCommon.Models.Employee.RoleType> roletype = ViewData["RoleTypes"] as List<MedicareNetworksCommon.Models.Employee.RoleType>;
+    List<MedicareNetworksCommon.Models.Dashboard.Module> Modules = ViewData["AllModules"] as List<MedicareNetworksCommon.Models.Dashboard.Module>;
+}
+@model Tuple<MedicareNetworksCommon.Models.Employee.Emp, List<MedicareNetworksCommon.Models.Employee.Modules>>
+<h2>Edit Employee</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="panel-body">
+                    <form role="form" class="form-horizontal" method="post" action="/Employee/UpdateEmployee">
+                        <input type="hidden" id="empID" name="empID" value="@Model.Item1.ID" />
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtName">
+                                Name											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    <input id="txtName" name="txtName" class="form-control" type="text" title="" placeholder="Name" value="@Model.Item1.Name">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtFatherName">
+                                Father Name											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    <input id="txtFatherName" name="txtFatherName" class="form-control" type="text" title="" value="@Model.Item1.FatherName" placeholder="Father Name">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtReligion">
+                                Religion
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    <input id="txtReligion" name="txtReligion" class="form-control" type="text" title="" placeholder="Religion" value="@Model.Item1.Religion">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtNationality">
+                                Nationality										
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    <input id="txtNationality" name="txtNationality" class="form-control" type="text" title="" placeholder="Nationality" value="@Model.Item1.Nationality">
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtDateofBirth">
+                                Date of Birth
+                            </label>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <input id="txtDateofBirth" name="txtDateofBirth" type="text" data-date-format="dd-mm-yyyy" data-date-viewmode="years" class="form-control date-picker" value="@Model.Item1.DateofBirth.ToString("dd-MM-yyyy").Replace('/', '-')">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtCNIC">
+                                CNIC											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    <input id="txtCNIC" name="txtCNIC" class="form-control" type="text" title="" placeholder="CNIC" value="@Model.Item1.CNIC">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtMobileNumber">
+                                Mobile Number											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    <input id="txtMobileNumber" name="txtMobileNumber" class="form-control" type="text" title="" placeholder="Mobile Number" value="@Model.Item1.MobileNo">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtAddress">
+                                Address											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    <input id="txtAddress" name="txtAddress" class="form-control" type="text" title="" placeholder="Address" value="@Model.Item1.Address">
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtUserName">
+                                User Name											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    <input id="txtUserName" name="txtUserName" class="form-control" type="text" title="" placeholder="User Name" value="@Model.Item1.LoginName">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="txtPassword">
+                                Password										
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    <input id="txtPassword" name="txtPassword" class="form-control" type="text" title="" placeholder="Password" value="@Model.Item1.LoginPass">
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="ddlRoleType">
+                                Role Type											
+                            </label>
+                            <div class="col-sm-6">
+                                <span class="input-icon">
+                                    <select id="ddlRoleType" name="ddlRoleType" class="form-control">
+                                        @foreach (var item in roletype)
+                                        {
+                                            if (item.RoletypeID == Model.Item1.RoleTypeID)
+                                            {<option value="@item.RoletypeID" selected="selected">@item.Role</option>}
+                                            else
+                                            {<option value="@item.RoletypeID">@item.Role</option>}
+                                        }
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="ddlRoleType">
+                                Assign Modules
+                            </label>
+                            <div class="col-sm-6">
+                                @foreach (var item in Modules)
+                                {
+                                    if (Model.Item2.ToList().Where(a => a.ID == item.ModueID).Count() > 0)
+                                    {                                
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" checked="checked" value="@item.ModueID" class="grey" name="Modulescheckbox">
+                                        @item.ModuleName
+                                    </label>
+                                    }
+                                    else
+                                    {
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value="@item.ModueID" class="grey" name="Modulescheckbox">
+                                        @item.ModuleName
+                                    </label>
+                                    }
+
+                                }
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" onclick="UpdateEmployee">
+                            Update
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
